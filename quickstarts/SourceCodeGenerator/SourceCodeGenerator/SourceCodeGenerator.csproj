@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
-		<Nullable>enable</Nullable>
-		<LangVersion>8.0</LangVersion>
+		<!--SourceGenerator支持调试需要设置TargetFrameworks 而不是TargetFramework 并且只能是netstandard2.0-->
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<!--<TargetFramework>netstandard2.0</TargetFramework>-->
+		<IsRoslynComponent>true</IsRoslynComponent>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 	</PropertyGroup>
 
@@ -12,6 +12,6 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
 	</ItemGroup>
 </Project>

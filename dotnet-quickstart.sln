@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "quickstarts", "quickstarts"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "quickstarts\UnitTests\UnitTests.csproj", "{DFB92AD7-F8E5-4AAE-98FC-5F35FB0E12C7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceCodeGenerater", "SourceCodeGenerater", "{2AC05669-1A88-4C50-929D-9EA0749E7B31}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceCodeGenerator", "SourceCodeGenerator", "{2AC05669-1A88-4C50-929D-9EA0749E7B31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceCodeGeneraterApp", "quickstarts\SourceCodeGenerater\SourceCodeGeneraterApp\SourceCodeGeneraterApp.csproj", "{3497B3C4-ED33-4825-8A05-6D63138C7C61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceCodeGenerator", "quickstarts\SourceCodeGenerator\SourceCodeGenerator\SourceCodeGenerator.csproj", "{AE9B08A7-D954-4F76-8FD7-EAEFA6518D43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceCodeGenerator", "SourceCodeGenerator\SourceCodeGenerator.csproj", "{A1D27BC5-BF64-4979-AA39-15E60697DC1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceCodeGeneratorApp", "quickstarts\SourceCodeGenerator\SourceCodeGeneratorApp\SourceCodeGeneratorApp.csproj", "{94036E8D-EE77-48A9-B723-CBE9662D5947}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{DFB92AD7-F8E5-4AAE-98FC-5F35FB0E12C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFB92AD7-F8E5-4AAE-98FC-5F35FB0E12C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFB92AD7-F8E5-4AAE-98FC-5F35FB0E12C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3497B3C4-ED33-4825-8A05-6D63138C7C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3497B3C4-ED33-4825-8A05-6D63138C7C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3497B3C4-ED33-4825-8A05-6D63138C7C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3497B3C4-ED33-4825-8A05-6D63138C7C61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1D27BC5-BF64-4979-AA39-15E60697DC1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1D27BC5-BF64-4979-AA39-15E60697DC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1D27BC5-BF64-4979-AA39-15E60697DC1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1D27BC5-BF64-4979-AA39-15E60697DC1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE9B08A7-D954-4F76-8FD7-EAEFA6518D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE9B08A7-D954-4F76-8FD7-EAEFA6518D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9B08A7-D954-4F76-8FD7-EAEFA6518D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE9B08A7-D954-4F76-8FD7-EAEFA6518D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94036E8D-EE77-48A9-B723-CBE9662D5947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94036E8D-EE77-48A9-B723-CBE9662D5947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94036E8D-EE77-48A9-B723-CBE9662D5947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94036E8D-EE77-48A9-B723-CBE9662D5947}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,8 +38,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DFB92AD7-F8E5-4AAE-98FC-5F35FB0E12C7} = {421B1F1B-D108-4C81-852A-F285C0210206}
 		{2AC05669-1A88-4C50-929D-9EA0749E7B31} = {421B1F1B-D108-4C81-852A-F285C0210206}
-		{3497B3C4-ED33-4825-8A05-6D63138C7C61} = {2AC05669-1A88-4C50-929D-9EA0749E7B31}
-		{A1D27BC5-BF64-4979-AA39-15E60697DC1D} = {2AC05669-1A88-4C50-929D-9EA0749E7B31}
+		{AE9B08A7-D954-4F76-8FD7-EAEFA6518D43} = {2AC05669-1A88-4C50-929D-9EA0749E7B31}
+		{94036E8D-EE77-48A9-B723-CBE9662D5947} = {2AC05669-1A88-4C50-929D-9EA0749E7B31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11567766-5465-4955-9AF2-9F1ECC680C6E}

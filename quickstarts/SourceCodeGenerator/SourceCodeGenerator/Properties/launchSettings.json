@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SourceCodeGenerater-Debug": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\SourceCodeGeneratorApp\\SourceCodeGeneratorApp.csproj"
+    }
+  }
+}
