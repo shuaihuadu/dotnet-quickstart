@@ -6,10 +6,6 @@ public class JsonSerializerTest
     public void Serialize()
     {
         User user = new(1, "test");
-        //{
-        //    Id = 1,
-        //    Name = "test"
-        //};
 
         string json = user.AsJson();
 
@@ -18,5 +14,15 @@ public class JsonSerializerTest
         Assert.NotNull(deserializedUser);
         Assert.Equal(1, deserializedUser.Id);
         Assert.Equal("test", deserializedUser.Name);
+    }
+
+    [Fact]
+    public void Deserialize()
+    {
+        string userJosn = "userJson";
+
+        User? user = userJosn.FromJson<User>();
+
+        Assert.Null(user);
     }
 }

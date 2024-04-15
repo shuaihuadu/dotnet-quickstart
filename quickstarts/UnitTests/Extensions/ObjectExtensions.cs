@@ -1,4 +1,5 @@
-﻿namespace QuickStart.Extensions;
+﻿
+namespace QuickStart.Extensions;
 
 public static class ObjectExtensions
 {
@@ -15,6 +16,13 @@ public static class ObjectExtensions
 
     public static T? FromJson<T>(this string json)
     {
-        return JsonSerializer.Deserialize<T>(json, jsonSerializerOptions);
+        try
+        {
+            return JsonSerializer.Deserialize<T>(json, jsonSerializerOptions);
+        }
+        catch (JsonException)
+        {
+            return default;
+        }
     }
 }
