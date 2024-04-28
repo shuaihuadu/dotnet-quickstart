@@ -1,4 +1,8 @@
+global using CustomConfigurationProvider;
 global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Options;
+global using QuickStart;
 global using QuickStart.Extensions;
 global using System.Runtime.CompilerServices;
 global using System.Text.Encodings.Web;

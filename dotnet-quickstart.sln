@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceCodeGenerator", "quic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceCodeGeneratorApp", "quickstarts\SourceCodeGenerator\SourceCodeGeneratorApp\SourceCodeGeneratorApp.csproj", "{94036E8D-EE77-48A9-B723-CBE9662D5947}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomConfigurationProvider", "quickstarts\CustomConfigurationProvider\CustomConfigurationProvider.csproj", "{A21A1963-B346-459C-B787-462819FC6C7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{94036E8D-EE77-48A9-B723-CBE9662D5947}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94036E8D-EE77-48A9-B723-CBE9662D5947}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94036E8D-EE77-48A9-B723-CBE9662D5947}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A21A1963-B346-459C-B787-462819FC6C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A21A1963-B346-459C-B787-462819FC6C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A21A1963-B346-459C-B787-462819FC6C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A21A1963-B346-459C-B787-462819FC6C7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 		{2AC05669-1A88-4C50-929D-9EA0749E7B31} = {421B1F1B-D108-4C81-852A-F285C0210206}
 		{AE9B08A7-D954-4F76-8FD7-EAEFA6518D43} = {2AC05669-1A88-4C50-929D-9EA0749E7B31}
 		{94036E8D-EE77-48A9-B723-CBE9662D5947} = {2AC05669-1A88-4C50-929D-9EA0749E7B31}
+		{A21A1963-B346-459C-B787-462819FC6C7D} = {421B1F1B-D108-4C81-852A-F285C0210206}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11567766-5465-4955-9AF2-9F1ECC680C6E}
