@@ -8,6 +8,8 @@ public abstract class BaseTest
 
     protected int SimulatedInputTextIndex = 0;
 
+    public BaseTest Console => this;
+
     protected BaseTest(ITestOutputHelper output)
     {
         this.Output = output;
@@ -24,17 +26,19 @@ public abstract class BaseTest
         TestConfiguration.Initialize(configuration);
     }
 
-    protected void WriteLine(object? target = null)
+    public void WriteLine(object? target = null)
     {
         this.Output.WriteLine(target?.ToString() ?? string.Empty);
     }
 
-    protected void Write(object? target = null)
+    public void WriteLine(string? format, params object?[] args) => this.Output.WriteLine(format);// ?? string.Empty, args);
+
+    public void Write(object? target = null)
     {
         this.Output.WriteLine(target?.ToString() ?? string.Empty);
     }
 
-    protected string? ReadLine()
+    public string? ReadLine()
     {
         if (SimulatedInputTextIndex < SimulatedInputText.Count)
         {
