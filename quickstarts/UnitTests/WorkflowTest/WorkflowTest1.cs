@@ -1,7 +1,6 @@
-﻿
-namespace UnitTests.WorkFlowTest;
+﻿namespace UnitTests.WorkFlowTest1;
 
-public class WorkflowTest(ITestOutputHelper output) : BaseTest(output)
+public class WorkflowTest1(ITestOutputHelper output) : BaseTest(output)
 {
     [Fact]
     public void Run()
@@ -47,7 +46,7 @@ public enum NodeStatus
     NotStarted,
     InProgress,
     Completed,
-    //Faild
+    Faild
 }
 
 public class WorkflowNode
@@ -72,7 +71,17 @@ public class WorkflowNode
         Console.WriteLine($"Executing Node {Id}");
         Status = NodeStatus.InProgress;
         System.Threading.Thread.Sleep(300); // Simulate work  
-        Status = NodeStatus.Completed;
+
+
+        if (Id == "3")
+        {
+            Status = NodeStatus.Faild;
+        }
+        else
+        {
+            Status = NodeStatus.Completed;
+        }
+
         this._output.WriteLine($"Node {Id} Completed");
     }
 }
