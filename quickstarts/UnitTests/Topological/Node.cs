@@ -1,4 +1,6 @@
-﻿namespace UnitTests.Topological;
+﻿using System.Diagnostics;
+
+namespace UnitTests.Topological;
 public enum NodeState
 {
     Pending,
@@ -25,7 +27,14 @@ public abstract class NodeBase<T> : INode<T>
     public NodeState State { get; set; } = NodeState.Pending;
 
     public abstract NodeExecutionResult<T> Execute(NodeExecutionContext context, Action action);
+
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private string DebuggerDisplay => string.IsNullOrWhiteSpace(this.Description) ? this.Name : $"{this.Name} ({this.Description})";
+
 }
+
+
 public class IntNode : NodeBase<int>
 {
     public override NodeExecutionResult<int> Execute(NodeExecutionContext context, Action action)

@@ -2,6 +2,13 @@
 
 public class Workflow<T>
 {
+    protected ITestOutputHelper Output { get; }
+
+    public Workflow(ITestOutputHelper output)
+    {
+        this.Output = output;
+    }
+
     private readonly List<INode<T>> _nodes = [];
 
     public void AddNode(INode<T> node)
@@ -12,12 +19,15 @@ public class Workflow<T>
     public void Execute(NodeExecutionContext context)
     {
         var sortedNodes = TopologicalSort(_nodes);
+
         foreach (var node in sortedNodes)
         {
+            this.Output.WriteLine(node.Name + " = " + node.State.ToString());
+
             if (CanExecuteNode(node))
             {
                 var result = node.Execute(context, () => Console.WriteLine($"Executing {node.Name}"));
-                Console.WriteLine($"Node {node.Name} executed with result: {result.Result}, state: {result.State}, message: {result.Message}");
+                this.Output.WriteLine($"Node {node.Name} executed with result: {result.Result}, state: {result.State}, message: {result.Message}");
             }
         }
     }
@@ -25,42 +35,56 @@ public class Workflow<T>
     private List<INode<T>> TopologicalSort(List<INode<T>> nodes)
     {
         var sortedList = new List<INode<T>>();
-        var visited = new HashSet<INode<T>>();
-        var visiting = new HashSet<INode<T>>();
+        var inDegree = new Dictionary<INode<T>, int>();
 
         foreach (var node in nodes)
         {
-            if (!visited.Contains(node))
+            inDegree[node] = 0;
+        }
+
+        foreach (var node in nodes)
+        {
+            foreach (var dependency in node.Dependencies)
             {
-                TopologicalSortVisit(node, visited, visiting, sortedList);
+                inDegree[dependency]++;
             }
         }
 
-        return sortedList;
-    }
+        var queue = new Queue<INode<T>>();
+        foreach (var node in nodes)
+        {
+            if (inDegree[node] == 0)
+            {
+                queue.Enqueue(node);
+            }
+        }
 
-    private void TopologicalSortVisit(INode<T> node, HashSet<INode<T>> visited, HashSet<INode<T>> visiting, List<INode<T>> sortedList)
-    {
-        if (visiting.Contains(node))
+        while (queue.Count > 0)
+        {
+            var node = queue.Dequeue();
+            sortedList.Add(node);
+
+            foreach (var dependent in node.Dependencies)
+            {
+                inDegree[dependent]--;
+                if (inDegree[dependent] == 0)
+                {
+                    queue.Enqueue(dependent);
+                }
+            }
+        }
+
+        if (sortedList.Count != nodes.Count)
         {
             throw new InvalidOperationException("Graph has at least one cycle.");
         }
 
-        if (!visited.Contains(node))
-        {
-            visiting.Add(node);
-            foreach (var dependency in node.Dependencies)
-            {
-                TopologicalSortVisit(dependency, visited, visiting, sortedList);
-            }
-            visiting.Remove(node);
-            visited.Add(node);
-            sortedList.Add(node);
-        }
+        return sortedList;
     }
 
     private bool CanExecuteNode(INode<T> node)
     {
         return node.Dependencies.All(dependency => dependency.State == NodeState.Completed);
     }
+
 }

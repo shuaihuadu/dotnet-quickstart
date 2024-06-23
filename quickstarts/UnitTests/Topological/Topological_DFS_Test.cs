@@ -2,12 +2,12 @@
 
 namespace UnitTests;
 
-public class TopologicalTest(ITestOutputHelper output) : BaseTest(output)
+public class Topological_DFS_Test(ITestOutputHelper output) : BaseTest(output)
 {
     [Fact]
     public void RunTopologicalTest()
     {
-        var workflow = new Workflow<int>();
+        var workflow = new WorkflowDFS<int>();
         var context = new NodeExecutionContext();
 
         var intNode = new IntNode { Name = "IntNode", Description = "This is an integer node" };
