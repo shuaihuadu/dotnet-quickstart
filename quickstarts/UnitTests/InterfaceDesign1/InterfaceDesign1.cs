@@ -48,9 +48,11 @@ public class ConcreteNode : NodeBase<string>
         };
     }
 }
-public class Program
+
+public class DesignTest
 {
-    public static void Main()
+    [Fact]
+    public void Run()
     {
         INode<string> concreteNode = new ConcreteNode();
         INode node = concreteNode; // 由于 ConcreteNode 继承自 NodeBase<string>，它同时实现了 INode<string> 和 INode  
