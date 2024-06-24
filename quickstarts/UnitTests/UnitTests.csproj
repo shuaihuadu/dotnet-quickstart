@@ -11,10 +11,12 @@
 
   <ItemGroup>
     <Compile Remove="InterfaceDesign1\InterfaceDesign5.cs" />
+    <Compile Remove="WorkflowDesign\WorkflowV1.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="InterfaceDesign1\InterfaceDesign5.cs" />
+    <Content Include="WorkflowDesign\WorkflowV1.cs" />
   </ItemGroup>
 
   <ItemGroup>
