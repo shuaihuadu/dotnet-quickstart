@@ -58,8 +58,4 @@
     <ProjectReference Include="..\CustomConfigurationProvider\CustomConfigurationProvider.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="WorkflowDesign\" />
-  </ItemGroup>
-
 </Project>
