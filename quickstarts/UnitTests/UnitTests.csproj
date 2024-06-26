@@ -11,12 +11,10 @@
 
   <ItemGroup>
     <Compile Remove="InterfaceDesign1\InterfaceDesign5.cs" />
-    <Compile Remove="WorkflowDesign\WorkflowV1.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="InterfaceDesign1\InterfaceDesign5.cs" />
-    <Content Include="WorkflowDesign\WorkflowV1.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,10 +25,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="itext" Version="8.0.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="PdfPig" Version="0.1.8" />
     <PackageReference Include="xunit" Version="2.8.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1">
       <PrivateAssets>all</PrivateAssets>
@@ -56,6 +56,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomConfigurationProvider\CustomConfigurationProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="WorkflowDesign\" />
   </ItemGroup>
 
 </Project>
