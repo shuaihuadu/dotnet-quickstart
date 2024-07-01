@@ -14,16 +14,7 @@ public abstract class BaseTest
     {
         this.Output = output;
 
-        LoadUserSecrets();
-    }
-
-    private void LoadUserSecrets()
-    {
-        IConfigurationRoot configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.Development.json", true)
-            .Build();
-
-        TestConfiguration.Initialize(configuration);
+        TestConfiguration.Initialize();
     }
 
     public void WriteLine(object? target = null)

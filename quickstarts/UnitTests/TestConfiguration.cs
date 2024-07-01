@@ -6,16 +6,32 @@ public sealed class TestConfiguration
 
     private static TestConfiguration? _instance;
 
-    private TestConfiguration(IConfigurationRoot configurationRoot)
+    public static void Initialize()
     {
-        _configurationRoot = configurationRoot;
+        IConfigurationRoot configurationRoot = new ConfigurationBuilder()
+            .AddJsonFile(@"D:\appsettings\test_configuration.json", true)
+            .Build();
+
+        Initialize(configurationRoot);
     }
 
-    public static void Initialize(IConfigurationRoot configurationRoot)
+    private TestConfiguration(IConfigurationRoot configurationRoot)
+    {
+        this._configurationRoot = configurationRoot;
+    }
+
+    private static void Initialize(IConfigurationRoot configurationRoot)
     {
         _instance = new TestConfiguration(configurationRoot);
     }
+    public static AzureOpenAIEmbeddingsConfig AzureOpenAIEmbeddings => LoadSection<AzureOpenAIEmbeddingsConfig>();
 
+    public class AzureOpenAIEmbeddingsConfig
+    {
+        public string DeploymentName { get; set; } = string.Empty;
+        public string Endpoint { get; set; } = string.Empty;
+        public string ApiKey { get; set; } = string.Empty;
+    }
     private static T LoadSection<T>([CallerMemberName] string? caller = null)
     {
         if (_instance == null)
@@ -28,6 +44,6 @@ public sealed class TestConfiguration
             throw new ArgumentNullException(nameof(caller));
         }
 
-        return _instance._configurationRoot.GetSection(caller).Get<T>() ?? throw new Exception($"The configuration section '{caller} not found.'");
+        return _instance._configurationRoot.GetSection(caller).Get<T>() ?? throw new KeyNotFoundException("Configuration not found.");
     }
 }
