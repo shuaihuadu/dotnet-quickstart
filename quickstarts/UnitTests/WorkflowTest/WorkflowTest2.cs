@@ -1,4 +1,4 @@
-﻿namespace MCS.Library.Common.Tests;
+﻿namespace UnitTests.WorkflowTest;
 
 public class Workflow_Test2
 {

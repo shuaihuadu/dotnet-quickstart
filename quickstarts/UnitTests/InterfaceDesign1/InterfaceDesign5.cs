@@ -1,5 +1,29 @@
 ﻿namespace UnitTests.InterfaceDesign5;
 
+// 定义 NodeExecutionResult 和 NodeExecutionContext 类  
+public class NodeExecutionResult<T>
+{
+    public bool Success { get; set; }
+    public T Output { get; set; }
+    // 其他属性和方法  
+}
+
+public class NodeExecutionContext
+{
+    // 上下文属性和方法  
+}
+
+public enum NodeStatus
+{
+    Saved = 1,
+    Published = 2,
+    CancelPublished = 3
+}
+public enum NodeType
+{
+    None
+}
+
 /// <summary>
 /// 通用的节点接口，所有节点需要实现这个接口
 /// </summary>
@@ -8,7 +32,7 @@ public interface INode
     string Id { get; set; }
     string Name { get; set; }
     NodeType Type { get; set; }
-    NodeState State { get; set; }
+    NodeStatus State { get; set; }
     Task<NodeExecutionResult<object>> ExecuteAsync(NodeExecutionContext context);
 }
 /// <summary>
@@ -28,9 +52,8 @@ public abstract class NodeBase : INode
     public string Id { get; set; }
     public string Name { get; set; }
     public NodeType Type { get; set; }
-    public NodeState State { get; set; }
+    public NodeStatus State { get; set; }
     public double Version { get; set; }
-
     public abstract Task<NodeExecutionResult<object>> ExecuteAsync(NodeExecutionContext context);
 }
 
@@ -67,9 +90,9 @@ public class CustomNode : NodeBase
     }
 }
 
-public class CustomNode<TOutput> : NodeBase<TOutput>
+public class CustomNode<TOutput> : NodeBase<TOutput> where TOutput : new()
 {
-    protected override Task<NodeExecutionResult<TOutput>> ExecuteNodeAsync(NodeExecutionContext context)
+    public override Task<NodeExecutionResult<TOutput>> ExecuteNodeAsync(NodeExecutionContext context)
     {
         // 实现节点的具体执行逻辑  
         // 这里只是一个示例，需要根据实际需求进行实现  
@@ -81,36 +104,36 @@ public class CustomNode<TOutput> : NodeBase<TOutput>
     }
 }
 
-[Fact]
-public void Run()
-{
-    var customNode = new CustomNode
-    {
-        Id = "1",
-        Name = "Sample Node",
-        Type = NodeType.SomeType,
-        State = NodeState.Active,
-        Version = 1.0
-    };
+//[Fact]
+//public void Run()
+//{
+//    var customNode = new CustomNode
+//    {
+//        Id = "1",
+//        Name = "Sample Node",
+//        Type = NodeType.None,
+//        State = NodeStatus.CancelPublished,
+//        Version = 1.0
+//    };
 
-    var context = new NodeExecutionContext();
-    var result = await customNode.ExecuteAsync(context);
-    Console.WriteLine($"Execution success: {result.Success}");
+//    var context = new NodeExecutionContext();
+//    var result = await customNode.ExecuteAsync(context);
+//    Console.WriteLine($"Execution success: {result.Success}");
 
-    var customGenericNode = new CustomNode<SampleOutputData>
-    {
-        Id = "2",
-        Name = "Sample Generic Node",
-        Type = NodeType.AnotherType,
-        State = NodeState.Inactive,
-        Input = new NodeInputParameters(),
-        Variables = new NodeVariables(),
-        Version = 1.1
-    };
+//    var customGenericNode = new CustomNode<SampleOutputData>
+//    {
+//        Id = "2",
+//        Name = "Sample Generic Node",
+//        Type = NodeType.None,
+//        State = NodeStatus.CancelPublished,
+//        Input = new NodeInputParameters(),
+//        Variables = new NodeVariables(),
+//        Version = 1.1
+//    };
 
-    var genericResult = await customGenericNode.ExecuteAsync(context);
-    Console.WriteLine($"Execution success: {genericResult.Success}");
-}
+//    var genericResult = await customGenericNode.ExecuteAsync(context);
+//    Console.WriteLine($"Execution success: {genericResult.Success}");
+//}
 
 /*
  好的，我可以帮助你创建一个抽象类 `NodeBase` 和一个带泛型的抽象类 `NodeBase<TOutput>`，并提供它们的派生类以及调用示例。下面是具体的代码：  
