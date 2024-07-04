@@ -66,4 +66,34 @@ public class MilvusDbClient
 
         return insertResult.Ids.StringIds;
     }
+
+    public async Task<SearchResults> SearchEntitiesAsync(string collectionName, ReadOnlyMemory<float> embedding, int limit)
+    {
+        MilvusCollection collection = this._milvusClient.GetCollection(collectionName);
+
+        return await collection.SearchAsync("embedding", [embedding], SimilarityMetricType.Cosine, 2, new SearchParameters
+        {
+            OutputFields =
+            {
+                "search",
+                "content"
+            }
+        });
+    }
+
+    public async Task<IReadOnlyList<FieldData>> GetEntityAsync(string collectionName, string entityId)
+    {
+        MilvusCollection collection = this._milvusClient.GetCollection(collectionName);
+
+        IReadOnlyList<FieldData> queryResult = await collection.QueryAsync($"id == \"{entityId}\"", new QueryParameters
+        {
+            OutputFields =
+            {
+                "search",
+                "content"
+            }
+        });
+
+        return queryResult;
+    }
 }
