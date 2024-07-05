@@ -39,7 +39,8 @@ public class MilvusTest(ITestOutputHelper output) : BaseTest(output)
     [Fact]
     public async Task RunSearchAsync()
     {
-        string search = "前部和后部均有口袋设计";
+        //string search = "Nike最新休闲裤 ### 材质\n这款短裤采用牛仔布材质，通常由棉制成，具有耐用性和舒适性。\n\n### 设计细节\n1. **口袋设计**：配有多个口袋，包括前方两个斜插口袋和腿部两个带盖口袋，增加了实用性和储物空间。\n2. **腰带**：附带一条皮质腰带，增强了整体的时尚感和实用性。\n3. **拉链和纽扣**：采用金属拉链和纽扣，增加了牢固性和经典风格。\n4. **内衬设计**：内衬采用条纹图案，增加了视觉上的层次感和独特性。\n\n### 版型\n这款短裤的版型为宽松版型，适合休闲和户外活动。长度适中，通常略高于膝盖，提供了良好的活动自由度。\n\n### 特点\n1. **耐用性**：牛仔布材质和金属配件使这款短裤具有较高的耐用性，适合户外和日常穿着。\n2. **多功能性**：多口袋设计增加了实用性，能够携带更多随身物品。\n3. **时尚性**：皮质腰带和内衬条纹设计，使短裤在实用的同时也不失时尚感。\n4. **舒适性**：宽松版型和牛仔布材质保证了穿着的舒适性，适合长时间穿着。";
+        string search = "Nike最新休闲裤 ### 材质\\n这款短裤采用柔软的棉质混纺面料，提供舒适的穿着体验。棉质材料具有良好的透气性和吸湿性，适合日常穿着和运动。\\n\\n### 设计细节\\n1. **腰部设计**：采用松紧腰带和白色抽绳设计，方便调整松紧，确保短裤贴合腰部。\\n2. **口袋**：两侧有斜插口袋，方便存放小物件。\\n3. **品牌标识**：左腿下方印有经典的Nike标志，增加品牌辨识度。\\n\\n### 版型\\n这款短裤属于宽松版型，提供较大的活动空间，适合各种体型。短裤长度适中，刚好在膝盖以上，既保证了运动时的灵活性，又不失时尚感。\\n\\n### 特点\\n1. **舒适性**：棉质混纺面料柔软透气，适合长时间穿着。\\n2. **实用性**：松紧腰带和抽绳设计，方便调节松紧，适合不同腰围的人群。\\n3. **时尚感**：灰色经典且百搭，左腿下方的Nike标志增加了时尚元素，使其既适合运动又适合日常穿着。";
 
         ReadOnlyMemory<float> embeddings = await this.GetEmbeddingAsync(search);
 
@@ -66,8 +67,8 @@ public class MilvusTest(ITestOutputHelper output) : BaseTest(output)
         //string content1 = SearchAndContent[0].Search;
         //string content2 = SearchAndContent[1].Search;
 
-        string content1 = SearchAndContent[1].Search;
-        string content2 = SearchAndContent[2].Search;
+        //string content1 = SearchAndContent[1].Search;
+        //string content2 = SearchAndContent[2].Search;
 
         //string content1 = SearchAndContent[2].Search;
         //string content2 = SearchAndContent[3].Search;
@@ -80,6 +81,9 @@ public class MilvusTest(ITestOutputHelper output) : BaseTest(output)
 
         //string content1 = SearchAndContent[1].Search;
         //string content2 = SearchAndContent[3].Search;
+
+        string content1 = @"鞋子,Nike,运动";
+        string content2 = @"长裤,Nike,休闲";
 
 
         ReadOnlyMemory<float> embeddings1 = await this.GetEmbeddingAsync(content1);
