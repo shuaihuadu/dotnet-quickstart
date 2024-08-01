@@ -7,7 +7,7 @@ using System.Text;
 namespace UnitTests.iText;
 
 
-public class iTextTest(ITestOutputHelper output) : BaseTest(output)
+public class iTextReadPdfTest(ITestOutputHelper output) : BaseTest(output)
 {
     [Fact]
     public void Run()

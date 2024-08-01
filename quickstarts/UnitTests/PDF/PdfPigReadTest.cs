@@ -6,7 +6,7 @@ using UglyToad.PdfPig.XObjects;
 namespace UnitTests.iText;
 
 
-public class PdfPigTest(ITestOutputHelper output) : BaseTest(output)
+public class PdfPigReadTest(ITestOutputHelper output) : BaseTest(output)
 {
     [Fact]
     public void Run()

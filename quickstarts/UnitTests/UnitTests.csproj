@@ -18,7 +18,8 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="itext" Version="8.0.4" />
+		<PackageReference Include="itext" Version="8.0.5" />
+		<PackageReference Include="itext.bouncy-castle-adapter" Version="8.0.5" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
@@ -48,6 +49,15 @@
 		</None>
 		<None Update="docs\xlsx\1.xlsx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="PDF\simhei.ttf">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="PDF\simsun.ttf">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="PDF\sk.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="Python\script.py">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
