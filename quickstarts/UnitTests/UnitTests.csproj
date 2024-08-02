@@ -50,6 +50,9 @@
 		<None Update="docs\xlsx\1.xlsx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="PDF\2.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="PDF\simhei.ttf">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
