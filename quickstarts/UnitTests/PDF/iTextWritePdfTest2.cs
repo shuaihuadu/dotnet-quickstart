@@ -4,7 +4,7 @@ using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
-//using iText.Layout.Borders;
+using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 
@@ -79,7 +79,7 @@ public class iTextWritePdfTest2
 
         cell.Add(image);
 
-        //cell.SetBorder(Border.NO_BORDER);
+        cell.SetBorder(Border.NO_BORDER);
 
         return cell;
     }
@@ -93,7 +93,7 @@ public class iTextWritePdfTest2
 
         cell.Add(paragraph);
 
-        //cell.SetBorder(Border.NO_BORDER);
+        cell.SetBorder(Border.NO_BORDER);
 
         return cell;
     }
