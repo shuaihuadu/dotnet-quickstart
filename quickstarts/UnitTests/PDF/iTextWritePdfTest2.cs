@@ -12,7 +12,6 @@ namespace UnitTests.iText;
 
 public class iTextWritePdfTest2
 {
-
     [Fact]
     public static void Run()
     {
@@ -20,8 +19,11 @@ public class iTextWritePdfTest2
 
         string fontPath = System.IO.Path.Combine(Environment.CurrentDirectory, "PDF", "simsun.ttf");
 
-        byte[] imageContent = File.ReadAllBytes(System.IO.Path.Combine(Environment.CurrentDirectory, "PDF", "sk.png"));
-        byte[] imageContent2 = File.ReadAllBytes(System.IO.Path.Combine(Environment.CurrentDirectory, "PDF", "2.png"));
+        byte[] imageContent1 = File.ReadAllBytes(System.IO.Path.Combine(Environment.CurrentDirectory, "PDF", "1.jpeg"));
+        byte[] imageContent2 = File.ReadAllBytes(System.IO.Path.Combine(Environment.CurrentDirectory, "PDF", "2.jpg"));
+        byte[] imageContent3 = File.ReadAllBytes(System.IO.Path.Combine(Environment.CurrentDirectory, "PDF", "3.jpg"));
+
+        File.WriteAllBytes("output_image.jpg", imageContent2);
 
         List<PdfPageContent> pageContents =
         [
@@ -31,7 +33,7 @@ public class iTextWritePdfTest2
                      "在这个示例中，我们创建了一个PdfWriter实例来指定文件的输出位置，创建了一个PdfDocument实例并添加了三页到PDF文档中。",
                      "这个示例展示了如何在PDF的指定页面上同时添加文本和图片。如果你有更多的需求，比如在不同的页面添加不同的内容或调整内容的位置和样式，你可以根据需要进一步修改代码。",
                      "希望这个示例对你有所帮助！如果你有更多问题，欢迎继续提问。"],
-                ImageContents = [imageContent,imageContent2]
+                ImageContents = [imageContent1,imageContent2, imageContent3]
             },
         ];
 
@@ -72,7 +74,7 @@ public class iTextWritePdfTest2
     {
         Cell cell = new Cell();
 
-        Image image = new Image(ImageDataFactory.Create(imageContent));
+        Image image = new Image(ImageDataFactory.Create(imageContent, true));
 
         image.SetWidth(width);
         image.SetAutoScaleHeight(false);
@@ -89,12 +91,27 @@ public class iTextWritePdfTest2
         Cell cell = new Cell();
         Paragraph paragraph = new Paragraph(text)
                     .SetFont(font)
-                    .SetFontSize(3);
+                    .SetFontSize(10);
 
         cell.Add(paragraph);
 
         cell.SetBorder(Border.NO_BORDER);
 
         return cell;
+    }
+
+    private static byte[] Convert(byte[] imageData)
+    {
+        using (MemoryStream pngStream = new MemoryStream(imageData))
+        {
+            using (System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(pngStream))
+            {
+                using (MemoryStream jpgStream = new MemoryStream())
+                {
+                    bitmap.Save(jpgStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    return jpgStream.ToArray();
+                }
+            }
+        }
     }
 }
