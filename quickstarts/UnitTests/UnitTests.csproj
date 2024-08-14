@@ -24,6 +24,7 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+		<PackageReference Include="Microsoft.SemanticKernel" Version="1.17.1" />
 		<PackageReference Include="Milvus.Client" Version="2.3.0-preview.1" />
 		<PackageReference Include="PdfPig" Version="0.1.8" />
 		<PackageReference Include="Pgvector" Version="0.3.0" />
