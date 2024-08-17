@@ -46,6 +46,9 @@
 		<None Update="ClosedXML\1.xlsx">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="ClosedXML\2.xlsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="docs\pdf\test.pdf">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

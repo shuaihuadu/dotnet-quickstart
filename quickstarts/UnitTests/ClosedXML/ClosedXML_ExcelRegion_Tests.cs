@@ -3,7 +3,7 @@ using System.Text;
 
 namespace UnitTests.ClosedXML;
 
-public class ClosedXML_Tests(ITestOutputHelper output) : BaseTest(output)
+public class ClosedXML_ExcelRegion_Tests(ITestOutputHelper output) : BaseTest(output)
 {
     [Fact]
     public void Run()
