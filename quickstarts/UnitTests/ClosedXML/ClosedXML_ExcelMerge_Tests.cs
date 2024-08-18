@@ -36,12 +36,14 @@ public class ClosedXML_ExcelMerge_Tests(ITestOutputHelper output) : BaseTest(out
             foreach (var row in worksheet.RowsUsed().Skip(1))
             {
                 var rowData = new Dictionary<string, object>();
+
                 for (int i = 1; i <= headers.Count; i++)
                 {
                     rowData[headers[i - 1]] = row.Cell(i).Value.ToString();
                 }
 
-                string sku = rowData["货号"].ToString();
+                string sku1 = rowData["货号"].ToString();
+                string sku = rowData.First().Value.ToString();
 
                 if (!skuData.ContainsKey(sku))
                 {
