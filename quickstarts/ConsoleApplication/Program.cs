@@ -1,66 +1,29 @@
 ﻿using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
 
-namespace SpeechToTextExample
+class Program
 {
-    class Program
+    async static Task FromStream(SpeechConfig speechConfig)
     {
-        static async Task Main(string[] args)
+        var reader = new BinaryReader(File.OpenRead(@"C:\Users\shuai\Desktop\1.wav"));
+        using var audioConfigStream = AudioInputStream.CreatePushStream();
+        using var audioConfig = AudioConfig.FromStreamInput(audioConfigStream);
+        using var speechRecognizer = new SpeechRecognizer(speechConfig, "zh-CN", audioConfig);
+
+        byte[] readBytes;
+        do
         {
-            string subscriptionKey = "";
-            string serviceRegion = "";
+            readBytes = reader.ReadBytes(1024);
+            audioConfigStream.Write(readBytes, readBytes.Length);
+        } while (readBytes.Length > 0);
 
-            var config = SpeechConfig.FromSubscription(subscriptionKey, serviceRegion);
+        var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
+        Console.WriteLine($"RECOGNIZED: Text={speechRecognitionResult.Text}");
+    }
 
-            config.SpeechRecognitionLanguage = "zh-CN";
-
-            using var recognizer = new SpeechRecognizer(config);
-
-            Console.WriteLine("请说话...");
-
-            recognizer.Recognizing += (s, e) =>
-            {
-                Console.WriteLine($"正在识别: {e.Result.Text}");
-            };
-
-            recognizer.Recognized += (s, e) =>
-            {
-                if (e.Result.Reason == ResultReason.RecognizedSpeech)
-                {
-                    Console.WriteLine($"已识别的内容: {e.Result.Text}");
-                }
-                else if (e.Result.Reason == ResultReason.NoMatch)
-                {
-                    Console.WriteLine("未识别到语音内容.");
-                }
-            };
-
-            recognizer.Canceled += (s, e) =>
-            {
-                Console.WriteLine($"识别已取消：Reason={e.Reason}");
-
-                if (e.Reason == CancellationReason.Error)
-                {
-                    Console.WriteLine($"错误信息: {e.ErrorDetails}");
-                }
-            };
-
-            recognizer.SessionStarted += (s, e) =>
-            {
-                Console.WriteLine("会话开始.");
-            };
-
-            recognizer.SessionStopped += (s, e) =>
-            {
-                Console.WriteLine("会话结束.");
-                Console.WriteLine("Press any key to exit...");
-            };
-
-            await recognizer.StartContinuousRecognitionAsync();
-
-            Console.WriteLine("Press any key to stop...");
-            Console.ReadKey();
-
-            await recognizer.StopContinuousRecognitionAsync();
-        }
+    async static Task Main(string[] args)
+    {
+        var speechConfig = SpeechConfig.FromSubscription("", "");
+        await FromStream(speechConfig);
     }
 }
