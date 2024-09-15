@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Program.cs.bak2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Program.cs.bak2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSCore" Version="1.2.1.2" />
     <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.40.0" />
   </ItemGroup>
 
