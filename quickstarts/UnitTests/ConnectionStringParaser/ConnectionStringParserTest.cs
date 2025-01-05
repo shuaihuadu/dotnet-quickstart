@@ -7,8 +7,8 @@ public class ConnectionStringParserTest(ITestOutputHelper output) : BaseTest(out
     [Fact]
     public void Parse()
     {
-        string connectionString = "Host=myHost;Port=5432;UserName=myUser;Password=my=Password;Extra=NotAllowed;";
-        var parsedConn = ConnectionStringParser.Parse(connectionString);
+        string connectionString = "Host=myHost;Port=5432;UserName=myUser;Password=my=Passwors;asd;Extra=NotAllowed;";
+        var parsedConn = ConnectionStringParser.ParseV2(connectionString);
 
         foreach (var kvp in parsedConn)
         {
@@ -19,7 +19,7 @@ public class ConnectionStringParserTest(ITestOutputHelper output) : BaseTest(out
 
 public static class ConnectionStringParser
 {
-    public static Dictionary<string, string> Parse(string connStr)
+    public static Dictionary<string, string> ParseV1(string connStr)
     {
         var connDict = new Dictionary<string, string>();
 
@@ -39,6 +39,36 @@ public static class ConnectionStringParser
             {
                 connDict[key] = value;
             }
+        }
+
+        return connDict;
+    }
+    public static Dictionary<string, string> ParseV2(string connStr)
+    {
+        var connDict = new Dictionary<string, string>();
+        var allowedKeys = new HashSet<string> { "Host", "Port", "UserName", "Password" };
+
+        int start = 0;
+        while (start < connStr.Length)
+        {
+            int end = connStr.IndexOf(';', start);
+            if (end == -1) end = connStr.Length;
+
+            string part = connStr.Substring(start, end - start);
+            int separatorIndex = part.IndexOf('=');
+
+            if (separatorIndex != -1)
+            {
+                string key = part.Substring(0, separatorIndex).Trim();
+                string value = part.Substring(separatorIndex + 1).Trim();
+
+                if (allowedKeys.Contains(key))
+                {
+                    connDict[key] = value;
+                }
+            }
+
+            start = end + 1;
         }
 
         return connDict;
