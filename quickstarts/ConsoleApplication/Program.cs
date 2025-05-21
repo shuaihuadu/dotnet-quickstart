@@ -1,46 +1,59 @@
-﻿using CSCore;
-using CSCore.Codecs.WAV;
+﻿using JiebaNet.Segmenter;
+
+class BM25Calculator
+{
+    private double k1 = 1.5;
+    private double b = 0.75;
+    private int N; // Total number of documents  
+    private double avgdl; // Average document length  
+
+    public BM25Calculator(int totalDocuments, double averageDocumentLength)
+    {
+        N = totalDocuments;
+        avgdl = averageDocumentLength;
+    }
+
+    public double ComputeBM25(string query, string document)
+    {
+        var segmenter = new JiebaSegmenter();
+        var queryTerms = segmenter.Cut(query).ToList();
+        var docTerms = segmenter.Cut(document).ToList();
+        var docLength = docTerms.Count;
+
+        var termFrequency = docTerms.GroupBy(t => t)
+                                    .ToDictionary(g => g.Key, g => g.Count());
+
+        double score = 0.0;
+
+        foreach (var term in queryTerms)
+        {
+            if (!termFrequency.ContainsKey(term))
+                continue;
+
+            int tf = termFrequency[term];
+            int df = termFrequency.ContainsKey(term) ? 1 : 0; // Since we have only one document  
+
+            double idf = Math.Log((N - df + 0.5) / (df + 0.5) + 1);
+            double termScore = idf * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * (docLength / avgdl)));
+
+            score += termScore;
+        }
+
+        return score;
+    }
+}
 
 class Program
 {
     static void Main()
     {
-        // 假设你的音频数据存储在 byte[] audioData 中  
-        byte[] audioData = GetAudioData(); // 你需要实现这个方法来获取你的音频数据  
+        string query = "示例查询";
+        string document = "这是一个包含查询词的示例文档";
 
-        // 设置音频格式  
-        int samplesPerSecond = 16000;
-        int bitsPerSample = 16;
-        int channels = 1;
+        // Assuming we have only one document, so N = 1 and avgdl = document length  
+        BM25Calculator bm25 = new BM25Calculator(totalDocuments: 1, averageDocumentLength: document.Length);
 
-        // 创建 WaveFormat  
-        WaveFormat waveFormat = new WaveFormat(samplesPerSecond, bitsPerSample, channels);
-
-        // 创建 MemoryStream 并写入音频数据  
-        using (MemoryStream memoryStream = new MemoryStream())
-        {
-            // 创建 WaveWriter  
-            using (WaveWriter waveWriter = new WaveWriter(memoryStream, waveFormat))
-            {
-                // 写入音频数据  
-                waveWriter.Write(audioData, 0, audioData.Length);
-            }
-
-            // 将 MemoryStream 转换成 byte[]  
-            byte[] wavData = memoryStream.ToArray();
-
-            // 将 byte[] 写入文件  
-            File.WriteAllBytes("output.wav", wavData);
-        }
-
-        Console.WriteLine("WAV 文件已成功创建！");
-    }
-
-    static byte[] GetAudioData()
-    {
-        // 这里你需要实现获取音频数据的逻辑  
-        // 例如，从文件读取或从网络获取  
-        // 这里仅作为示例返回一个空数组  
-        return new byte[0];
+        double score = bm25.ComputeBM25(query, document);
+        Console.WriteLine($"BM25 Score: {score}");
     }
 }
